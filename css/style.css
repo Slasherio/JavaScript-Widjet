@@ -11,14 +11,30 @@ body {
   font-style: italic;
 }
 
+.error {
+  background-color: #b22222;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.success {
+  background-color: green;
+  color: var(--white);
+  padding: 10px;
+  border-radius: 3px;
+}
+
+/**************************CARD GENEREAL STYLE*************************/
+
 .card {
   width: 40%;
   min-width: 300px;
   height: 100%;
-  min-height: 100%;
   background: var(--white);
   border-radius: 8px;
   border: 1px solid var(--light-grey);
+  margin: 30px;
 }
 
 .title-bar {
@@ -30,19 +46,36 @@ body {
   border-bottom: 1px solid var(--light-grey);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  cursor: pointer;
 }
 
 .collaps {
   border: 1px solid;
   border-radius: 5px;
   padding: 5px;
+  transition: 1s ease-in-out;
 }
 
 .title-bar > .title {
   font-size: 27px;
 }
 
-/***************************************************/
+.active,
+.title-bar:hover {
+  background-color: #ccc;
+}
+
+.active .collaps {
+  transform: rotate(180deg);
+}
+
+.info-table {
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.5s;
+}
+
+/**************************TABLE STYLE*************************/
 
 table {
   border-collapse: collapse;
@@ -56,7 +89,7 @@ thead {
 
 tbody {
   display: block;
-  height: 100px;
+  height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 15px;
@@ -75,8 +108,11 @@ th {
   padding: 10px;
 }
 
-td {
+tr {
   border-bottom: 1px solid var(--light-grey);
+}
+
+td {
   border-right: 1px solid var(--light-grey);
   padding: 10px;
 }
@@ -86,45 +122,58 @@ td:last-child {
   border-right: none;
 }
 
-/* table input[type='text'],
-table input[type='number'] {
+/**************************FORM INPUTS STYLE*************************/
+form {
+  display: flex;
+  width: 100%;
+}
+
+form > div {
+  border: 1px solid var(--light-grey);
+  padding: 20px;
+}
+
+form > div:last-child {
+  border-right: none;
+}
+
+input[type='number'],
+input[type='text'] {
   outline: none;
-  border: 1px solid #00ceae;
+  border: 1px solid var(--light-blue);
   height: 40px;
   line-height: 30px;
   padding: 0 10px;
   font-size: 15px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  font-family: lato, 'helvetica-light', 'sans-serif';
+  border-radius: 8px;
   letter-spacing: 0.7px;
 }
 
-table input[type='number'] {
-  width: 100px;
+input[type='number'] {
+  width: 40%;
 }
 
-.add_btn {
+.add-btn {
   background: none;
+  outline: none;
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
   line-height: 1.1;
-  border: 1px solid #00ceae;
-  border-radius: 15px;
-  color: #00ceae;
+  border: 1px solid var(--light-blue);
+  border-radius: 7px;
+  color: var(--light-blue);
+  padding: 9px 18px;
+  transition: 1s background;
 }
 
-i {
-  vertical-align: middle;
-  font-size: 25px;
-  color: #00ceae;
+.add-btn:hover {
+  background-color: var(--light-blue);
+  color: var(--white);
 }
 
-/***************************************************/
-/* .total {
+.total {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  text-align: left;
-} */
+  justify-content: space-around;
+}
