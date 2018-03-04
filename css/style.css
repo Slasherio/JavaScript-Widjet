@@ -1,0 +1,130 @@
+:root {
+  --white: #fff;
+  --light-white: #eef2f4;
+  --light-grey: #e0e0dc;
+  --light-blue: #3c8dc5;
+}
+
+body {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+}
+
+.card {
+  width: 40%;
+  min-width: 300px;
+  height: 100%;
+  min-height: 100%;
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--light-grey);
+}
+
+.title-bar {
+  background-color: var(--light-white);
+  color: #5d6f78;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--light-grey);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.collaps {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.title-bar > .title {
+  font-size: 27px;
+}
+
+/***************************************************/
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: var(--light-blue);
+  color: var(--white);
+}
+
+tbody {
+  display: block;
+  height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 15px;
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  border-bottom: 1px solid var(--light-grey);
+  border-right: 1px solid var(--light-grey);
+  padding: 10px;
+}
+
+td {
+  border-bottom: 1px solid var(--light-grey);
+  border-right: 1px solid var(--light-grey);
+  padding: 10px;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+/* table input[type='text'],
+table input[type='number'] {
+  outline: none;
+  border: 1px solid #00ceae;
+  height: 40px;
+  line-height: 30px;
+  padding: 0 10px;
+  font-size: 15px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family: lato, 'helvetica-light', 'sans-serif';
+  letter-spacing: 0.7px;
+}
+
+table input[type='number'] {
+  width: 100px;
+}
+
+.add_btn {
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.1;
+  border: 1px solid #00ceae;
+  border-radius: 15px;
+  color: #00ceae;
+}
+
+i {
+  vertical-align: middle;
+  font-size: 25px;
+  color: #00ceae;
+}
+
+/***************************************************/
+/* .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+} */
