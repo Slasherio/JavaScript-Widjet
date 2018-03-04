@@ -53,7 +53,7 @@ body {
   border: 1px solid;
   border-radius: 5px;
   padding: 5px;
-  transition: 1s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .title-bar > .title {
@@ -72,7 +72,6 @@ body {
 .info-table {
   overflow: hidden;
   max-height: 0;
-  transition: 0.5s;
 }
 
 /**************************TABLE STYLE*************************/
@@ -106,6 +105,7 @@ th {
   border-bottom: 1px solid var(--light-grey);
   border-right: 1px solid var(--light-grey);
   padding: 10px;
+  cursor: pointer;
 }
 
 tr {
@@ -122,6 +122,11 @@ td:last-child {
   border-right: none;
 }
 
+.sort-icon {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
 /**************************FORM INPUTS STYLE*************************/
 form {
   display: flex;
@@ -131,6 +136,9 @@ form {
 form > div {
   border: 1px solid var(--light-grey);
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 form > div:last-child {
@@ -151,6 +159,7 @@ input[type='text'] {
 
 input[type='number'] {
   width: 40%;
+  margin: 0px 10px;
 }
 
 .add-btn {
@@ -176,4 +185,16 @@ input[type='number'] {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+/**************************MEDIA QUERIES*************************/
+@media (max-width: 1182px) {
+  input[type='text'] {
+    width: 60%;
+  }
+}
+@media (max-width: 929px) {
+  form {
+    flex-direction: column;
+  }
 }

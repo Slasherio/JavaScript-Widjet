@@ -14,12 +14,13 @@ class Item {
  * 1. Adding item to list
  * 2. Clear inputs after adding
  * 3. Show alert if you forgot input some data
- * or when book successfull added
+ * or when item successfull added
  */
 class UI {
   addItem(item) {
     const list = document.getElementById('list');
     const row = document.createElement('tr');
+
     row.innerHTML = `
         <td>${item.name}</td>
         <td>$ ${item.amount}</td>
@@ -43,7 +44,32 @@ class UI {
     }, 2000);
   }
 
-  sortRows() {}
+  static compare(str1, str2) {
+    const numCmpr = str1 - str2;
+    return isNaN(numCmpr) ? str1.localeCompare(str2) : numCmpr;
+  }
+
+  static sortRows() {
+    const tbody = document.getElementsByTagName('tbody')[0];
+    let rows = [];
+
+    for (let i = 0; i < tbody.children.length; i++) {
+      rows.push(tbody.children[i]);
+    }
+
+    rows.sort((a, b) => {
+      return this.compare(a.innerHTML, b.innerHTML);
+    });
+
+    for (let i = 0; i < rows.length; i++) {
+      tbody.appendChild(rows[i]);
+    }
+  }
+
+  updateTotal(price) {
+    const total = document.querySelector('.totalAmount');
+    total.textContent = (parseFloat(total.textContent) + price).toFixed(2);
+  }
 }
 
 /**
@@ -52,6 +78,9 @@ class UI {
  * 1. Getting items from LS
  * 2. Add item to LS @param {*object} item
  * 3. Display items when you refresh page
+ * 4. Add total @param {*number} price
+ * 5. Get total
+ * 5. Dispay total sum
  */
 class Store {
   static getItems() {
@@ -77,9 +106,34 @@ class Store {
       ui.addItem(element);
     });
   }
+
+  static addTotal(price) {
+    let total = Store.getTotal();
+    total += price;
+    localStorage.setItem('totalSum', total);
+  }
+
+  static getTotal() {
+    let total;
+    if (localStorage.getItem('totalSum') === null) {
+      total = 0;
+    } else {
+      total = parseFloat(localStorage.getItem('totalSum'));
+    }
+    return total;
+  }
+
+  static displayTotal() {
+    const totalSum = Store.getTotal();
+    const ui = new UI();
+    ui.updateTotal(totalSum);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', Store.displayItems());
+document.addEventListener('DOMContentLoaded', Store.displayTotal());
+
+/***********************************Add event listeners************************************ */
 
 /**
  * Create accordion
@@ -90,7 +144,7 @@ document.querySelector('.title-bar').addEventListener('click', e => {
   if (infoTable.style.maxHeight) {
     infoTable.style.maxHeight = null;
   } else {
-    infoTable.style.maxHeight = infoTable.scrollHeight + 'px';
+    infoTable.style.maxHeight = 100 + '%';
   }
 });
 
@@ -102,12 +156,27 @@ document.getElementById('addItem').addEventListener('click', e => {
     amount = parseFloat(document.getElementById('amount').value);
 
   const item = new Item(name, amount);
+
   const ui = new UI();
-  if (name === '' || amount === '') {
+
+  if (!name || !amount) {
     ui.showAlert('Please fill in all inputs', 'error');
   } else {
     ui.showAlert('Item successfull added', 'success');
     ui.addItem(item);
     Store.addItem(item);
+    Store.addTotal(amount);
+    ui.updateTotal(amount);
+    ui.clearInputs();
+  }
+});
+
+document.getElementById('expensesData').addEventListener('click', e => {
+  const target = e.target;
+  if (target.tagName === 'I') {
+    target.classList.toggle('sort-icon');
+    UI.sortRows();
+  } else {
+    return;
   }
 });
