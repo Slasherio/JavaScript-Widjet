@@ -115,6 +115,7 @@ tr {
 td {
   border-right: 1px solid var(--light-grey);
   padding: 10px;
+  position: relative;
 }
 
 th:last-child,
@@ -122,9 +123,22 @@ td:last-child {
   border-right: none;
 }
 
+td:hover .delete {
+  display: inline-block;
+}
+
 .sort-icon {
   display: inline-block;
   transform: rotate(180deg);
+}
+
+.delete {
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  font-size: 20px;
+  display: none;
+  cursor: pointer;
 }
 
 /**************************FORM INPUTS STYLE*************************/

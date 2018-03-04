@@ -23,7 +23,10 @@ class UI {
 
     row.innerHTML = `
         <td>${item.name}</td>
-        <td>$ ${item.amount}</td>
+        <td>
+        $ ${item.amount}
+        <i class="ion-close-circled delete"></i>
+        </td>
         `;
     list.appendChild(row);
   }
@@ -69,6 +72,12 @@ class UI {
   updateTotal(price) {
     const total = document.querySelector('.totalAmount');
     total.textContent = (parseFloat(total.textContent) + price).toFixed(2);
+  }
+
+  deleteItem(target) {
+    if (target.classList.contains('delete')) {
+      target.parentElement.parentElement.remove();
+    }
   }
 }
 
@@ -128,6 +137,16 @@ class Store {
     const ui = new UI();
     ui.updateTotal(totalSum);
   }
+
+  static removeItem(name) {
+    const items = Store.getItems();
+    items.forEach((element, index) => {
+      if (element.name === name) {
+        items.splice(index, 1);
+      }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', Store.displayItems());
@@ -169,6 +188,8 @@ document.getElementById('addItem').addEventListener('click', e => {
     ui.updateTotal(amount);
     ui.clearInputs();
   }
+
+  e.preventDefault();
 });
 
 document.getElementById('expensesData').addEventListener('click', e => {
