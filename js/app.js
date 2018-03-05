@@ -183,8 +183,9 @@ document.getElementById('addItem').addEventListener('click', e => {
 
 document.getElementById('expensesData').addEventListener('click', e => {
   const target = e.target;
-  if (target.tagName === 'I') {
-    target.classList.toggle('sort-icon');
+  const sortIcon = document.querySelector('.sort');
+  if (target.classList.contains('sort-rows')) {
+    sortIcon.classList.toggle('sort-icon');
     UI.sortRows();
   } else {
     return;
