@@ -137,6 +137,7 @@ td:last-child {
   color: var(--light-blue);
   transition: 1s background;
   cursor: pointer;
+  outline: none;
 }
 
 /**************************FORM INPUTS STYLE*************************/
