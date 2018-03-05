@@ -23,11 +23,9 @@ class UI {
 
     row.innerHTML = `
         <td>${item.name}</td>
-        <td>
-        $ ${item.amount}
-        <i class="ion-close-circled delete"></i>
-        </td>
+        <td>$ ${item.amount}</td>
         `;
+
     list.appendChild(row);
   }
 
@@ -74,10 +72,11 @@ class UI {
     total.textContent = (parseFloat(total.textContent) + price).toFixed(2);
   }
 
-  deleteItem(target) {
-    if (target.classList.contains('delete')) {
-      target.parentElement.parentElement.remove();
-    }
+  static deleteAll() {
+    const list = document.getElementById('list');
+    const total = document.querySelector('.totalAmount');
+    list.innerHTML = '';
+    total.textContent = 0;
   }
 }
 
@@ -89,7 +88,7 @@ class UI {
  * 3. Display items when you refresh page
  * 4. Add total @param {*number} price
  * 5. Get total
- * 5. Dispay total sum
+ * 6. Dispay total sum
  */
 class Store {
   static getItems() {
@@ -136,16 +135,6 @@ class Store {
     const totalSum = Store.getTotal();
     const ui = new UI();
     ui.updateTotal(totalSum);
-  }
-
-  static removeItem(name) {
-    const items = Store.getItems();
-    items.forEach((element, index) => {
-      if (element.name === name) {
-        items.splice(index, 1);
-      }
-    });
-    localStorage.setItem('items', JSON.stringify(items));
   }
 }
 
@@ -200,4 +189,9 @@ document.getElementById('expensesData').addEventListener('click', e => {
   } else {
     return;
   }
+});
+
+document.getElementById('delete').addEventListener('click', e => {
+  UI.deleteAll();
+  localStorage.clear();
 });

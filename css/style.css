@@ -123,21 +123,19 @@ td:last-child {
   border-right: none;
 }
 
-td:hover .delete {
-  display: inline-block;
-}
-
 .sort-icon {
   display: inline-block;
   transform: rotate(180deg);
 }
 
 .delete {
-  position: absolute;
-  right: 20px;
-  top: 7px;
-  font-size: 20px;
-  display: none;
+  border: 1px solid steelblue;
+  background: none;
+  border-radius: 8px;
+  padding: 0px 14px;
+  font-size: 30px;
+  color: var(--light-blue);
+  transition: 1s background;
   cursor: pointer;
 }
 
@@ -190,7 +188,8 @@ input[type='number'] {
   transition: 1s background;
 }
 
-.add-btn:hover {
+.add-btn:hover,
+.delete:hover {
   background-color: var(--light-blue);
   color: var(--white);
 }
